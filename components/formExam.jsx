@@ -1,13 +1,12 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const FormExam = () => {
-  const [firstname, setName] = useState("");
+  const [firstname, setFirstname] = useState("");
   const [surname, setSurname] = useState("");
   const [fullname, setFullname] = useState("");
 
   const handleNameChange = (event) => {
-    setName(event.target.value);
+    setFirstname(event.target.value);
   };
 
   const handleSurnameChange = (event) => {
@@ -15,13 +14,12 @@ const FormExam = () => {
   };
 
   const handleSubmit = (event) => {
-    if (fullname === "") {
-      setFullname(firstname + " " + surname);
+    event.preventDefault();
+    if (firstname && surname) {
+      setFullname(`${firstname} ${surname}`);
     } else {
       setFullname("");
     }
-
-    console.log("name: ", firstname, surname);
   };
 
   return (
@@ -47,7 +45,7 @@ const FormExam = () => {
             <label className="px-2">Enter your Surname</label>
             <input
               type="text"
-              placeholder="Enter you surname"
+              placeholder="Enter your surname"
               value={surname}
               onChange={handleSurnameChange}
               className="text-center"
